@@ -26,7 +26,7 @@ export function Dashboard() {
   const setActiveTab = useDashboardStore((state) => state.setActiveTab)
   const queryClient = useQueryClient()
   // Use Date objects for state to match DateRangePicker
-  const [startDate, setStartDate] = useState<Date | undefined>(new Date('2021-01-01'))
+  const [startDate, setStartDate] = useState<Date | undefined>(new Date('2023-01-01'))
   const [endDate, setEndDate] = useState<Date | undefined>(new Date('2026-01-01'))
 
   useEffect(() => {

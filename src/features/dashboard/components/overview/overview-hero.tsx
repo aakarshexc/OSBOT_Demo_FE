@@ -11,24 +11,24 @@ export function DashboardHeroSection({ data }: DashboardHeroSectionProps) {
     return (
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-5">
             <HeroCard
-                title="Leads Generated"
+                title="Prospects"
                 value={formatNumber(data.prospectCount)}
-                subtext=" Leads generated"
+                subtext="Leads generated"
                 icon={Users}
                 colorClass="text-primary"
                 bgClass="bg-primary/10"
             />
             <HeroCard
-                title="Retainers Signed"
+                title="Matters"
                 value={formatNumber(data.matterCount)}
-                subtext="Active matters"
+                subtext="Retainers signed"
                 icon={FileText}
                 colorClass="text-primary"
                 bgClass="bg-primary/10"
             />
             <HeroCard
                 title="Demands Sent"
-                value={formatNumber(data.demandCount)}
+                value={formatNumber(data.demandValue.demand_count)}
                 subtext="Total demands"
                 icon={FileText}
                 colorClass="text-primary"
@@ -43,9 +43,9 @@ export function DashboardHeroSection({ data }: DashboardHeroSectionProps) {
                 bgClass="bg-primary/10"
             />
             <HeroCard
-                title="Average fee per case"
-                value={formatCurrency(data.caseValue.avg_case_value)}
-                subtext={`Count: ${formatNumber(data.caseValue.case_count)}`}
+                title="Average Value Per Case"
+                value={formatCurrency(data.averageValuePerCase)}
+                subtext="Per case"
                 icon={DollarSign}
                 colorClass="text-primary"
                 bgClass="bg-primary/10"

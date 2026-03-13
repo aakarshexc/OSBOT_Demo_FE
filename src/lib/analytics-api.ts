@@ -20,42 +20,40 @@ export interface ApiResponse<T> {
 }
 
 export interface SummaryData {
-    caseValue: {
-        avg_case_value: string
-        total_fee: string
-        case_count: string
-    }
+    averageValuePerCase: string
+    prospectCount: string
+    matterCount: string
+    activeCasesCount: number
+    timeOnDeskDays: string
+    caseVelocityDays: string
+    advancedClientCostRecoveryRate: string
     PipelineValue: {
+        total_attorney_fee: string
         total_pipeline_value: string
-        total_conservative_attorney_fee: string
-        total_llf_attorney_fee: string
+        conservative_attorney_fee: string
     }
+    litigationValue: {
+        litigation_count: string
+        projected_actual_value: string
+        projected_future_value: string
+    }
+    demandValue: {
+        demand_count: string
+        demand_offer_amount_total: string
+    }
+    SettlementValue: {
+        total_settlement_count: string
+        demand_offer_amount_total: string
+        llf_attorney_fee_total: string
+    }
+    activeCasesByPhase: Record<string, number>
+    casePhases: Record<string, string>
+    treatmentLevels: Record<string, string>
     caseValues: {
         projected_actual_value: string | null
         projected_future_value: string | null
         case_phase: string | null
     }[]
-    litigationValue: {
-        projected_actual_value: string
-        projected_future_value: string
-        count: string
-    }
-    SettlementValue: {
-        projected_actual_value: string
-        projected_future_value: string
-        count: string
-    }
-    prospectCount: string
-    matterCount: string
-    demandCount: string
-    activeCasesCount: number
-    activeCasesByPhase: Record<string, number>
-    casePhases: Record<string, string>
-    treatmentLevels: Record<string, string>
-    timeOnDeskDays: string
-    averageCaseValue: string
-    caseVelocityDays: string
-    advancedClientCostRecoveryRate: string
 }
 
 export interface HistoryItem {

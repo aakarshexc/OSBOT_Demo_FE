@@ -1,4 +1,4 @@
-import { Clock, DollarSign, Percent } from 'lucide-react'
+import { Clock, DollarSign, Percent, FileText } from 'lucide-react'
 import { HeroCard } from './hero-card'
 import { formatCurrency } from '@/utils/utils'
 import type { SummaryData } from '@/lib/analytics-api'
@@ -22,8 +22,8 @@ export function AdvancedAnalytics({ data }: AdvancedAnalyticsProps) {
                     bgClass="bg-primary/10"
                 />
                 <HeroCard
-                    title="Average Settlement Value per Case"
-                    value={formatCurrency(data.averageCaseValue)}
+                    title="Average Value Per Case"
+                    value={formatCurrency(data.averageValuePerCase)}
                     icon={DollarSign}
                     colorClass="text-primary"
                     bgClass="bg-primary/10"
@@ -36,9 +36,16 @@ export function AdvancedAnalytics({ data }: AdvancedAnalyticsProps) {
                     bgClass="bg-primary/10"
                 />
                 <HeroCard
-                    title="Cost Recovery Rate"
+                    title="Advanced Client Cost Recovery Rate"
                     value={data.advancedClientCostRecoveryRate}
                     icon={Percent}
+                    colorClass="text-primary"
+                    bgClass="bg-primary/10"
+                />
+                <HeroCard
+                    title="Demand Offer Amount"
+                    value={formatCurrency(data.demandValue.demand_offer_amount_total)}
+                    icon={FileText}
                     colorClass="text-primary"
                     bgClass="bg-primary/10"
                 />

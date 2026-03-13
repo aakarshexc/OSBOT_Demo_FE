@@ -32,7 +32,7 @@ export function FinancialPerformance({ data }: FinancialPerformanceProps) {
                                         color: "oklch(0.65 0.13 70)",
                                     },
                                     llfFee: {
-                                        label: "LLF Fee",
+                                        label: "Total Attorney Fee",
                                         color: "oklch(0.55 0.12 70)",
                                     },
                                 }}
@@ -41,12 +41,12 @@ export function FinancialPerformance({ data }: FinancialPerformanceProps) {
                                 <BarChart
                                     data={[{
                                         name: "Pipeline Value",
-                                        conservativeFee: typeof data.PipelineValue.total_conservative_attorney_fee === 'string'
-                                            ? parseFloat(data.PipelineValue.total_conservative_attorney_fee)
-                                            : data.PipelineValue.total_conservative_attorney_fee || 0,
-                                        llfFee: typeof data.PipelineValue.total_llf_attorney_fee === 'string'
-                                            ? parseFloat(data.PipelineValue.total_llf_attorney_fee)
-                                            : data.PipelineValue.total_llf_attorney_fee || 0,
+                                        conservativeFee: typeof data.PipelineValue.conservative_attorney_fee === 'string'
+                                            ? parseFloat(data.PipelineValue.conservative_attorney_fee)
+                                            : data.PipelineValue.conservative_attorney_fee || 0,
+                                        llfFee: typeof data.PipelineValue.total_attorney_fee === 'string'
+                                            ? parseFloat(data.PipelineValue.total_attorney_fee)
+                                            : data.PipelineValue.total_attorney_fee || 0,
                                     }]}
                                     margin={{ left: 20, right: 20, top: 20, bottom: 20 }}
                                 >
@@ -71,12 +71,12 @@ export function FinancialPerformance({ data }: FinancialPerformanceProps) {
                         <div className="space-y-3">
                             <div className="flex justify-between items-center">
                                 <span className="text-sm text-muted-foreground">Conservative Fee</span>
-                                <span className="text-lg font-bold">{formatCurrency(data.PipelineValue.total_conservative_attorney_fee)}</span>
+                                <span className="text-lg font-bold">{formatCurrency(data.PipelineValue.conservative_attorney_fee)}</span>
                             </div>
                             <div className="h-px bg-border" />
                             <div className="flex justify-between items-center">
-                                <span className="text-sm text-muted-foreground">LLF Fee</span>
-                                <span className="text-lg font-bold">{formatCurrency(data.PipelineValue.total_llf_attorney_fee)}</span>
+                                <span className="text-sm text-muted-foreground">Total Attorney Fee</span>
+                                <span className="text-lg font-bold">{formatCurrency(data.PipelineValue.total_attorney_fee)}</span>
                             </div>
                             <div className="h-px bg-border" />
                             <div className="flex justify-between items-center pt-1">
@@ -124,9 +124,9 @@ export function FinancialPerformance({ data }: FinancialPerformanceProps) {
                                         future: typeof data.litigationValue.projected_future_value === 'string'
                                             ? parseFloat(data.litigationValue.projected_future_value)
                                             : data.litigationValue.projected_future_value || 0,
-                                        count: typeof data.litigationValue.count === 'string'
-                                            ? parseFloat(data.litigationValue.count)
-                                            : data.litigationValue.count || 0,
+                                        count: typeof data.litigationValue.litigation_count === 'string'
+                                            ? parseFloat(data.litigationValue.litigation_count)
+                                            : data.litigationValue.litigation_count || 0,
                                     }]}
                                     margin={{ left: 20, right: 60, top: 20, bottom: 20 }}
                                 >
@@ -178,7 +178,7 @@ export function FinancialPerformance({ data }: FinancialPerformanceProps) {
                             </div>
                             <div className="flex justify-between items-center">
                                 <span className="text-sm text-muted-foreground">Count</span>
-                                <span className="text-sm font-semibold">{formatNumber(data.litigationValue.count)}</span>
+                                <span className="text-sm font-semibold">{formatNumber(data.litigationValue.litigation_count)}</span>
                             </div>
                         </div>
                     </CardContent>
@@ -195,13 +195,13 @@ export function FinancialPerformance({ data }: FinancialPerformanceProps) {
                         <div className="mb-4 w-full max-w-full overflow-hidden">
                             <ChartContainer
                                 config={{
-                                    actual: {
-                                        label: "Actual Value",
+                                    demandOffer: {
+                                        label: "Demand Offer Amount",
                                         color: "oklch(0.65 0.13 70)",
                                     },
-                                    future: {
-                                        label: "Future Value",
-                                        color: "oklch(0.35 0.02 264.695)",
+                                    llfFee: {
+                                        label: "LLF Attorney Fee",
+                                        color: "oklch(0.55 0.12 70)",
                                     },
                                     count: {
                                         label: "Count",
@@ -213,15 +213,15 @@ export function FinancialPerformance({ data }: FinancialPerformanceProps) {
                                 <ComposedChart
                                     data={[{
                                         name: "Settlement",
-                                        actual: typeof data.SettlementValue.projected_actual_value === 'string'
-                                            ? parseFloat(data.SettlementValue.projected_actual_value)
-                                            : data.SettlementValue.projected_actual_value || 0,
-                                        future: typeof data.SettlementValue.projected_future_value === 'string'
-                                            ? parseFloat(data.SettlementValue.projected_future_value)
-                                            : data.SettlementValue.projected_future_value || 0,
-                                        count: typeof data.SettlementValue.count === 'string'
-                                            ? parseFloat(data.SettlementValue.count)
-                                            : data.SettlementValue.count || 0,
+                                        demandOffer: typeof data.SettlementValue.demand_offer_amount_total === 'string'
+                                            ? parseFloat(data.SettlementValue.demand_offer_amount_total)
+                                            : data.SettlementValue.demand_offer_amount_total || 0,
+                                        llfFee: typeof data.SettlementValue.llf_attorney_fee_total === 'string'
+                                            ? parseFloat(data.SettlementValue.llf_attorney_fee_total)
+                                            : data.SettlementValue.llf_attorney_fee_total || 0,
+                                        count: typeof data.SettlementValue.total_settlement_count === 'string'
+                                            ? parseFloat(data.SettlementValue.total_settlement_count)
+                                            : data.SettlementValue.total_settlement_count || 0,
                                     }]}
                                     margin={{ left: 20, right: 60, top: 20, bottom: 20 }}
                                 >
@@ -248,8 +248,8 @@ export function FinancialPerformance({ data }: FinancialPerformanceProps) {
                                         />}
                                     />
                                     <Legend />
-                                    <Bar yAxisId="left" dataKey="actual" fill="oklch(0.65 0.13 70)" radius={[4, 4, 0, 0]} />
-                                    <Bar yAxisId="left" dataKey="future" fill="oklch(0.35 0.02 264.695)" radius={[4, 4, 0, 0]} />
+                                    <Bar yAxisId="left" dataKey="demandOffer" fill="oklch(0.65 0.13 70)" radius={[4, 4, 0, 0]} />
+                                    <Bar yAxisId="left" dataKey="llfFee" fill="oklch(0.55 0.12 70)" radius={[4, 4, 0, 0]} />
                                     <Line
                                         yAxisId="right"
                                         type="monotone"
@@ -263,17 +263,17 @@ export function FinancialPerformance({ data }: FinancialPerformanceProps) {
                         </div>
                         <div className="space-y-3">
                             <div className="flex justify-between items-center">
-                                <span className="text-sm text-muted-foreground">Projected Actual Value</span>
-                                <span className="text-lg font-bold">{formatCurrency(data.SettlementValue.projected_actual_value)}</span>
+                                <span className="text-sm text-muted-foreground">Demand Offer Amount</span>
+                                <span className="text-lg font-bold">{formatCurrency(data.SettlementValue.demand_offer_amount_total)}</span>
                             </div>
                             <div className="h-px bg-border" />
                             <div className="flex justify-between items-center">
-                                <span className="text-sm text-muted-foreground">Projected Future Value</span>
-                                <span className="text-sm font-semibold">{formatCurrency(data.SettlementValue.projected_future_value)}</span>
+                                <span className="text-sm text-muted-foreground">LLF Attorney Fee Total</span>
+                                <span className="text-sm font-semibold">{formatCurrency(data.SettlementValue.llf_attorney_fee_total)}</span>
                             </div>
                             <div className="flex justify-between items-center">
-                                <span className="text-sm text-muted-foreground">Count</span>
-                                <span className="text-sm font-semibold">{formatNumber(data.SettlementValue.count)}</span>
+                                <span className="text-sm text-muted-foreground">Total Settlement Count</span>
+                                <span className="text-sm font-semibold">{formatNumber(data.SettlementValue.total_settlement_count)}</span>
                             </div>
                         </div>
                     </CardContent>

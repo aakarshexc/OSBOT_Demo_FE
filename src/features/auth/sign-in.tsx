@@ -59,7 +59,7 @@ export function SignIn() {
               </div>
               <h1 className='text-2xl font-heading font-bold text-foreground'>{APP_NAME}</h1>
             </div>
-            <p className='text-sm text-muted-foreground'>Settlement Assistance & Legal Practice Management</p>
+            <p className='text-sm text-muted-foreground'>PI Practice Navigator - Legal Practice Management</p>
           </div>
 
           {/* Welcome Section */}
@@ -68,7 +68,7 @@ export function SignIn() {
               Welcome Back
             </h2>
             <p className='text-muted-foreground'>
-              Sign in to access your settlement assistance dashboard
+              Sign in to access your PIN BOT dashboard
             </p>
           </div>
 

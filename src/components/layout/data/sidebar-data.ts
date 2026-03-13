@@ -164,8 +164,8 @@ export function getSidebarData(options: SidebarOptions = {}): SidebarData {
 // Default export for backward compatibility
 export const sidebarData: SidebarData = {
   user: {
-    name: 'SettleAssist',
-    email: 'demo@settleassist.com',
+    name: 'PIN BOT',
+    email: 'demo@pinbot.com',
     avatar: '/avatars/shadcn.jpg',
   },
   navGroups: [

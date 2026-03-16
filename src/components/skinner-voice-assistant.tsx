@@ -10,7 +10,7 @@ import {
 import { TokenSource, type TokenSourceConfigurable, type TokenSourceFetchOptions } from 'livekit-client'
 import { Loader2, Mic, MicOff, Radio } from 'lucide-react'
 import { fetchLiveKitToken } from '@/lib/livekit-api'
-import '@livekit/components-styles';
+import '@livekit/components-styles'
 
 function buildParticipantName(): string {
   // Match backend's expected identity style.
@@ -110,7 +110,7 @@ export default function SkinnerVoiceAssistant() {
     return (
       <div className='flex h-full items-center justify-center rounded-xl border border-destructive/30 bg-destructive/5 p-6 text-center'>
         <p className='text-sm text-destructive font-medium'>
-          LiveKit agent not configured. Set VITE_LIVEKIT_AGENT_ID in your .env file.
+          LiveKit agent not configured
         </p>
       </div>
     )

@@ -100,11 +100,21 @@ export default function SkinnerVoiceAssistant() {
 
   const [participantName] = useState(() => buildParticipantName())
   const [roomName] = useState(() => buildRoomName())
-  const primaryAgentId = import.meta.env.VITE_LIVEKIT_AGENT_ID?.trim() || 'Payal'
+  // VITE_LIVEKIT_AGENT_ID is inlined at build/dev-server start. Restart dev server after changing .env.
+  const primaryAgentId = import.meta.env.VITE_LIVEKIT_AGENT_ID?.trim() ?? ''
   const configuredAgentName = import.meta.env.VITE_LIVEKIT_AGENT_NAME?.trim()
-  const [activeAgentId, setActiveAgentId] = useState(primaryAgentId)
-  const [hasRetriedAgentFallback, setHasRetriedAgentFallback] = useState(primaryAgentId === 'Payal')
+  const [activeAgentId] = useState(primaryAgentId)
   const fallbackServerUrl = import.meta.env.VITE_LIVEKIT_URL
+
+  if (!primaryAgentId) {
+    return (
+      <div className='flex h-full items-center justify-center rounded-xl border border-destructive/30 bg-destructive/5 p-6 text-center'>
+        <p className='text-sm text-destructive font-medium'>
+          LiveKit agent not configured. Set VITE_LIVEKIT_AGENT_ID in your .env file.
+        </p>
+      </div>
+    )
+  }
 
   const tokenSource: TokenSourceConfigurable = useMemo(
     () =>
@@ -185,15 +195,6 @@ export default function SkinnerVoiceAssistant() {
       } catch (error) {
         if (cancelled || abortController.signal.aborted) return
         const message = error instanceof Error ? error.message : 'Unable to start LiveKit voice session.'
-
-        // Retry once with known-good fallback agent regardless of error wording.
-        if (!hasRetriedAgentFallback && activeAgentId !== 'Payal') {
-          setHasRetriedAgentFallback(true)
-          setActiveAgentId('Payal')
-          setVoiceError(`Agent "${activeAgentId}" unavailable. Retrying with fallback agent...`)
-          return
-        }
-
         setVoiceError(message)
       }
     }
@@ -205,7 +206,7 @@ export default function SkinnerVoiceAssistant() {
       abortController.abort()
       endRef.current().catch(() => undefined)
     }
-  }, [activeAgentId, hasRetriedAgentFallback])
+  }, [activeAgentId])
 
   if (voiceError) {
     return (

@@ -243,7 +243,7 @@ export default function SkinnerBot() {
                                 </div>
                             </div>
                         ) : (
-                            <SkinnerVoiceAssistant />
+                            <SkinnerVoiceAssistant key={import.meta.env.VITE_LIVEKIT_AGENT_ID ?? 'voice'} />
                         )}
                     </CardContent>
 

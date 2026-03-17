@@ -100,13 +100,12 @@ export default function SkinnerVoiceAssistant() {
 
   const [participantName] = useState(() => buildParticipantName())
   const [roomName] = useState(() => buildRoomName())
-  // VITE_LIVEKIT_AGENT_ID is inlined at build/dev-server start. Restart dev server after changing .env.
-  const primaryAgentId = import.meta.env.VITE_LIVEKIT_AGENT_ID?.trim() ?? ''
-  const configuredAgentName = import.meta.env.VITE_LIVEKIT_AGENT_NAME?.trim()
-  const [activeAgentId] = useState(primaryAgentId)
+  // VITE_LIVEKIT_AGENT_ID - read directly, never use options/cached values. Restart dev server after .env changes.
+  const agentId = (import.meta.env.VITE_LIVEKIT_AGENT_ID ?? '').trim()
+  const configuredAgentName = (import.meta.env.VITE_LIVEKIT_AGENT_NAME ?? '').trim()
   const fallbackServerUrl = import.meta.env.VITE_LIVEKIT_URL
 
-  if (!primaryAgentId) {
+  if (!agentId) {
     return (
       <div className='flex h-full items-center justify-center rounded-xl border border-destructive/30 bg-destructive/5 p-6 text-center'>
         <p className='text-sm text-destructive font-medium'>
@@ -121,17 +120,16 @@ export default function SkinnerVoiceAssistant() {
       TokenSource.custom(async (options) => {
         const resolvedParticipantName = options.participantName || participantName
         const resolvedRoomName = options.roomName || roomName
-        const resolvedAgentId = options.agentName || activeAgentId
-        const isLikelyAgentId = /^CA_/i.test(resolvedAgentId)
+        // Always use agentId from env - never options.agentName (can be cached/stale)
+        const isLikelyAgentId = /^CA_/i.test(agentId)
 
         const tokenResponse = await fetchLiveKitToken({
           participantName: resolvedParticipantName,
           roomName: resolvedRoomName,
-          agentId: resolvedAgentId,
-          // Only send agentName when we really have a name; CA_* should stay in agentId.
+          agentId,
           agentName:
             configuredAgentName ||
-            (!isLikelyAgentId ? resolvedAgentId : undefined),
+            (!isLikelyAgentId ? agentId : undefined),
         })
 
         const serverUrl = tokenResponse.serverUrl || fallbackServerUrl
@@ -144,16 +142,16 @@ export default function SkinnerVoiceAssistant() {
           serverUrl,
         }
       }),
-    [activeAgentId, configuredAgentName, fallbackServerUrl, participantName, roomName]
+    [agentId, configuredAgentName, fallbackServerUrl, participantName, roomName]
   )
 
   const tokenOptions: TokenSourceFetchOptions = useMemo(
     () => ({
       roomName,
       participantName,
-      agentName: activeAgentId,
+      agentName: agentId,
     }),
-    [activeAgentId, participantName, roomName]
+    [agentId, participantName, roomName]
   )
 
   const session = useSession(tokenSource, {
@@ -206,7 +204,7 @@ export default function SkinnerVoiceAssistant() {
       abortController.abort()
       endRef.current().catch(() => undefined)
     }
-  }, [activeAgentId])
+  }, [agentId])
 
   if (voiceError) {
     return (

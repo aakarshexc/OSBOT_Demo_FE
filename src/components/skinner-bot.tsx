@@ -42,7 +42,7 @@ export default function SkinnerBot() {
     const [messages, setMessages] = useState<Message[]>([
         {
             role: 'assistant',
-            content: "Hi, I'm PIN BOT. I can provide insights related to prospects, matters, marketing, and finances. How can I help you today?",
+            content: "Hi, I am Ellie, your Personal Assistant VoiceBot for your PI Business. You can ask me any questions related to PI operations in your business. Looking forward to help you.",
         },
     ])
     const [input, setInput] = useState('')
@@ -60,7 +60,7 @@ export default function SkinnerBot() {
             setMessages([
                 {
                     role: 'assistant',
-                    content: "Hi, I'm PIN BOT. I can provide insights related to prospects, matters, marketing, and finances. How can I help you today?",
+                    content: "Hi, I'm Ellie Bot. I can provide insights related to prospects, matters, marketing, and finances. How can I help you today?",
                 },
             ])
             setInput('')
@@ -146,7 +146,7 @@ export default function SkinnerBot() {
                                 </AvatarFallback>
                             </Avatar>
                             <div>
-                                <CardTitle className="text-base font-bold">PIN BOT</CardTitle>
+                                <CardTitle className="text-base font-bold">Ellie Bot</CardTitle>
                             </div>
                         </div>
                         <div className="flex items-center gap-1">
@@ -291,7 +291,7 @@ export default function SkinnerBot() {
                         </span>
                     )}
                 </div>
-                <span className="font-bold text-sm">PIN BOT</span>
+                <span className="font-bold text-sm">Ellie Bot</span>
             </Button>
         </div>
     )

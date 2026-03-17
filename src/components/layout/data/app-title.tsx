@@ -16,7 +16,7 @@ export function AppTitle() {
         >
           <Link to='/dashboard'>
             <div className='grid flex-1 text-start text-sm leading-tight'>
-              <span className='truncate font-bold text-3xl'>PIN BOT</span>
+              <span className='truncate font-bold text-3xl'>Ellie Bot</span>
             </div>
           </Link>
         </SidebarMenuButton>

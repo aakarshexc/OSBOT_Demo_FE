@@ -68,7 +68,7 @@ export function SignIn() {
               Welcome Back
             </h2>
             <p className='text-muted-foreground'>
-              Sign in to access your PIN BOT dashboard
+              Sign in to access your Ellie Bot dashboard
             </p>
           </div>
 

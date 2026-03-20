@@ -16,7 +16,8 @@ export function AppTitle() {
         >
           <Link to='/dashboard'>
             <div className='grid flex-1 text-start text-sm leading-tight'>
-              <span className='truncate font-bold text-3xl'>Ellie Bot</span>
+              <span className='truncate font-bold text-2xl'>Ellie Bot</span>
+              <span className='truncate text-xs font-medium text-muted-foreground mt-0.5'>PI Dashboard</span>
             </div>
           </Link>
         </SidebarMenuButton>

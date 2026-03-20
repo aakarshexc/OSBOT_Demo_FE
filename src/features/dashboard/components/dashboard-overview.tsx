@@ -17,10 +17,10 @@ export function DashboardOverview({ startDate, endDate }: DashboardOverviewProps
 
     if (isLoading) {
         return (
-            <div className='flex items-center justify-center min-h-[400px]'>
+            <div className='flex flex-col items-center justify-center min-h-[400px] gap-6'>
                 <div className="flex flex-col items-center gap-5">
                     <div className='animate-spin rounded-full h-12 w-12 border-2 border-primary/30 border-t-primary'></div>
-                    <p className="text-sm text-muted-foreground font-medium">Loading dashboard data...</p>
+                    <p className="text-sm text-muted-foreground font-medium">Loading your PI firm stats...</p>
                 </div>
             </div>
         )

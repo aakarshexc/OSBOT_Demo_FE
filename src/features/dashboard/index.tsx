@@ -4,6 +4,8 @@ import { DateRangePicker } from './components/date-range-picker'
 import { Tabs, TabsContent } from '@/components/ui/tabs'
 import { DashboardOverview } from './components/dashboard-overview'
 import { DashboardHistory } from './components/dashboard-history'
+import { DashboardBranding } from './components/dashboard-branding'
+import { PageBranding } from './components/page-branding'
 import { useAuthStore } from '@/stores/auth-store'
 import { useDashboardStore } from '@/stores/dashboard-store'
 import {
@@ -143,31 +145,26 @@ export function Dashboard() {
   return (
     <Main fluid>
       <div className="mx-auto w-full max-w-[1920px] 2xl:max-w-[2400px] px-4 sm:px-6 lg:px-8">
-        <div className='mb-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between'>
-          <h1 className='text-3xl font-heading font-bold tracking-tight text-foreground'>
-            Welcome{user?.name ? `, ${user.name}` : ''}
-          </h1>
-          <div className='flex flex-col items-end gap-2'>
+        <DashboardBranding user={user}>
+          <div className="flex flex-col items-stretch sm:items-end gap-2">
             <DateRangePicker
               dateFrom={startDate}
               dateTo={endDate}
               onDateFromChange={handleStartDateChange}
               onDateToChange={handleEndDateChange}
             />
-            <div className='flex items-center gap-2'>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={refreshActiveTab}
-                className="h-8 rounded-full px-3 gap-1.5 border-muted-foreground/20 shadow-sm hover:shadow hover:border-primary/30"
-                title="Refresh current tab data"
-              >
-                <RefreshCw className="h-4 w-4" />
-                <span className="sr-only sm:not-sr-only sm:ml-2">Refresh</span>
-              </Button>
-            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={refreshActiveTab}
+              className="h-8 rounded-lg px-3 gap-1.5 border-border/60 shadow-sm hover:border-primary/30 self-end"
+              title="Refresh current tab data"
+            >
+              <RefreshCw className="h-4 w-4" />
+              <span className="sr-only sm:not-sr-only sm:ml-2">Refresh</span>
+            </Button>
           </div>
-        </div>
+        </DashboardBranding>
 
         <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-4 pb-24">
 
@@ -175,27 +172,33 @@ export function Dashboard() {
             <DashboardOverview startDate={formattedStart} endDate={formattedEnd} />
           </TabsContent>
 
-          <TabsContent value="active-cases">
+          <TabsContent value="active-cases" className="space-y-4">
+            <PageBranding title="Active Cases" description="Track and manage your PI cases in progress" />
             <ActiveCasesTable startDate={formattedStart} endDate={formattedEnd} />
           </TabsContent>
 
-          <TabsContent value="reports">
+          <TabsContent value="reports" className="space-y-4">
+            <PageBranding title="Pipeline Reports" description="Financial pipeline and fee analysis for your PI firm" />
             <ReportsTable startDate={formattedStart} endDate={formattedEnd} />
           </TabsContent>
 
-          <TabsContent value="settlement">
+          <TabsContent value="settlement" className="space-y-4">
+            <PageBranding title="Settlement Cases" description="Settlement outcomes and case resolution tracking" />
             <SettlementCasesTable startDate={formattedStart} endDate={formattedEnd} />
           </TabsContent>
 
-          <TabsContent value="litigation">
+          <TabsContent value="litigation" className="space-y-4">
+            <PageBranding title="Litigation Cases" description="Litigation stage and value tracking" />
             <LitigationCasesTable startDate={formattedStart} endDate={formattedEnd} />
           </TabsContent>
 
-          <TabsContent value="prospects">
+          <TabsContent value="prospects" className="space-y-4">
+            <PageBranding title="Prospects" description="Leads and intake pipeline for your PI practice" />
             <ProspectsTable startDate={formattedStart} endDate={formattedEnd} />
           </TabsContent>
 
-          <TabsContent value="history">
+          <TabsContent value="history" className="space-y-4">
+            <PageBranding title="Activity History" description="Data sync and activity logs" />
             <DashboardHistory startDate={formattedStart} endDate={formattedEnd} />
           </TabsContent>
 

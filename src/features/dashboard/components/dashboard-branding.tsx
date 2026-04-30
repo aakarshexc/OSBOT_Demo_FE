@@ -13,11 +13,11 @@ export function DashboardBranding({ user, children }: DashboardBrandingProps) {
           <Bot className="h-5 w-5" />
         </div>
         <div className="min-w-0">
-          <h1 className="text-xl sm:text-2xl font-heading font-bold tracking-tight text-foreground truncate">
+          <h1 className="text-base sm:text-lg font-heading font-semibold tracking-tight text-foreground truncate">
             Welcome{user?.name ? `, ${user.name}` : ''}
           </h1>
           <div className="flex items-center gap-2 mt-0.5 flex-wrap">
-            <span className="text-sm text-muted-foreground">
+            <span className="text-xs text-muted-foreground">
               Ellie Bot · Your PI practice assistant
             </span>
             <span className="hidden sm:inline text-muted-foreground/50">·</span>

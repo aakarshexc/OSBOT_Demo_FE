@@ -39,22 +39,38 @@ export function AppHeader({
   const location = useLocation()
   const pageTitle = getPageTitle(location.pathname)
 
+  const branding = (
+    <span className="font-heading font-extrabold tracking-tight text-foreground text-2xl sm:text-3xl leading-none">
+      Ellie Bot
+    </span>
+  )
+
   const defaultContent = (
     <>
-      <span className="flex-1 min-w-0 text-sm font-medium text-foreground truncate">
+      {branding}
+      <span className="text-muted-foreground/40 text-xl leading-none select-none">
+        /
+      </span>
+      <span className="flex-1 min-w-0 text-sm font-medium text-muted-foreground truncate">
         {pageTitle}
       </span>
       {rightContent && <div className="flex items-center">{rightContent}</div>}
     </>
   )
 
+  const navContent = (
+    <>
+      {branding}
+      <span className="text-muted-foreground/40 text-xl leading-none select-none">
+        /
+      </span>
+      <TopNav links={topNavLinks} />
+    </>
+  )
+
   return (
     <Header fixed={fixed}>
-      {topNavLinks.length > 0 ? (
-        <TopNav links={topNavLinks} />
-      ) : (
-        defaultContent
-      )}
+      {topNavLinks.length > 0 ? navContent : defaultContent}
     </Header>
   )
 }
